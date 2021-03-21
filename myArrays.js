@@ -70,6 +70,19 @@ class myArrays {
     }
     return arr
   }
+  //Заменяет в массиве данные на нужные
+  fiil(array, value, ...index) {
+    if (index.length == 0) {
+      for (let i in array) {
+        array[i] = value
+      }
+      return array
+    }
+    for (let val of index) {
+      array[val] = value
+    }
+    return array
+  }
 }
 
 let users = [
@@ -79,5 +92,6 @@ let users = [
   { user: 'pebbles', active: false },
 ]
 
-const arr = new myArrays()
-console.log(arr.dropRightWhile(users, { active: false }))
+const arr = [1, 4, 3]
+const myArr = new myArrays()
+console.log(myArr.fiil(arr, 'a', 1, 2))
