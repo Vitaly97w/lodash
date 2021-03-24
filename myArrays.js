@@ -58,7 +58,7 @@ class myArrays {
     }
     return array
   }
-
+  //не работает
   dropRightWhile(arr, pred) {
     const objR = []
     for (let i = 0; i < arr.length; i++) {
@@ -83,6 +83,40 @@ class myArrays {
     }
     return array
   }
+  //голова массива
+  head(arr) {
+    return arr[0]
+  }
+  //выравнивает массив на один уровень в глубину
+  flatten(arr) {
+    const newArr = []
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].length > 0) {
+        for (let j = 0; j < arr[i].length; j++) {
+          newArr.push(arr[i][j])
+        }
+      } else {
+        newArr.push(arr[i])
+      }
+    }
+    return newArr
+  }
+  //сглаживает массив до одного уровня вложиности
+  flattenDeep(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].length > 0) {
+        arr = this.flatten(arr)
+      }
+    }
+    return arr
+  }
+  //сглаживает массив до n глубины
+  flattenDepth(arr, n) {
+    for (let i = 0; i < n; i++) {
+      arr = this.flatten(arr)
+    }
+    return arr
+  }
 }
 
 let users = [
@@ -92,6 +126,14 @@ let users = [
   { user: 'pebbles', active: false },
 ]
 
-const arr = [1, 4, 3]
+const arr = [
+  1,
+  [4],
+  [[5, 4]],
+  [
+    [8, 2],
+    [3, [1, [2]], 7],
+  ],
+]
 const myArr = new myArrays()
-console.log(myArr.fiil(arr, 'a', 1, 2))
+console.log(myArr.flattenDepth(arr, 0))
