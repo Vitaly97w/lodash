@@ -117,6 +117,58 @@ class myArrays {
     }
     return arr
   }
+  //Создает объект из массивов типа ключ-значение (не раб)
+  fromPairs(arr) {
+    const obj = {}
+    arr = this.flatten(arr)
+    for (let i in arr) {
+      if (i % 2 == 0) obj[arr[i]] = arr[i + 1]
+    }
+    return obj
+  }
+  //возвращает индекс элемента, вохможен поиск от определенного индекса
+  indexOf(arr, value, fromIndex = 0) {
+    for (let i = 0 + fromIndex; i < arr.length; i++) {
+      if (arr[i] == value) {
+        return i
+      }
+    }
+  }
+  //возвращает массив без последнего элемента
+  initial(arr) {
+    arr.pop()
+    return arr
+  }
+  // передаются массивы, возвращаем общие элементы (пока неь знаю как сделать)
+  intersection(...arr) {}
+  //Преобразует все элементы в массиве в строку, разделенную разделителем.
+  join(arr, separator = ',') {
+    let str = ''
+    for (let value of arr) {
+      if (value != arr[arr.length - 1]) {
+        str += value + separator
+      } else {
+        str += value
+      }
+    }
+    return str
+  }
+  //возвращает последний элемент массива
+  last(arr) {
+    return arr[arr.length - 1]
+  }
+  //поиск индекса элемента с конца массива
+  lastIndexOf(arr, value, fromIndex = arr.length - 1) {
+    for (let i = arr.length - fromIndex; i >= 0; i--) {
+      if (arr[i] == value) {
+        return i
+      }
+    }
+  }
+  //Получает элемент с индексом n массива. Если n отрицательно, возвращается n-й элемент с конца.
+  nth(arr, n = 0) {
+    return n > 0 ? arr[n] : arr[arr.length + n]
+  }
 }
 
 let users = [
@@ -126,14 +178,7 @@ let users = [
   { user: 'pebbles', active: false },
 ]
 
-const arr = [
-  1,
-  [4],
-  [[5, 4]],
-  [
-    [8, 2],
-    [3, [1, [2]], 7],
-  ],
-]
+const arr = [2, 4, 1]
+const arr1 = [1, 6, 1, 3, 1]
 const myArr = new myArrays()
-console.log(myArr.flattenDepth(arr, 0))
+console.log(myArr.nth(arr1, -2))
